@@ -1,0 +1,114 @@
+.input-field {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  max-width: 100%;
+  font-size: $hv-font-size;
+  font-family: $hv-font-family;
+  &__label {
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    color: $hv-input-font-color;
+    font-size: $hv-input-font-size;
+    font-family: $hv-input-font-family;
+    line-height: 1;
+    transform: translateY(0rem);
+    transform-origin: 0 100%;
+    transition: transform $hv-transition;
+    pointer-events: none;
+    padding: $hv-input-padding;
+    padding-top: calc(#{$hv-padding-top} + #{$hv-border-width * 2});
+    padding-bottom: calc(#{$hv-padding-bottom} + #{$hv-border-width * 2});
+    padding-left: calc(#{$hv-padding-left} + #{$hv-border-width * 2});
+    padding-right: calc(#{$hv-padding-right} + #{$hv-border-width * 2});
+  }
+  &__input {
+    display: block;
+    min-width: 240px;
+    border: $hv-input-border-inactive;
+    border-radius: $hv-input-border-radius;
+    background-color: $hv-White;
+    font-size: $hv-input-font-size;
+    font-family: $hv-input-font-family;
+    line-height: 1;
+    padding: #{$hv-input-padding-top / 3 * 4} #{$hv-input-padding-right} #{$hv-input-padding-bottom /
+      3 * 2} #{$hv-input-padding-left};
+
+    &:not(:placeholder-shown) {
+      & + .input-field__label {
+        color: $hv-GrayMid;
+      }
+    }
+    &:focus,
+    &:not(:placeholder-shown) {
+      & + .input-field__label {
+        transform: translateY(-1rem) scale(0.95);
+      }
+    }
+    &:focus {
+      border: $hv-input-border-active;
+      outline: none;
+      & + .input-field__label {
+        color: $hv-Blue;
+      }
+    }
+    &[disabled] {
+      border: $hv-input-border-inactive;
+      pointer-events: none;
+    }
+  }
+  &__error {
+    border-radius: $hv-border-radius;
+    background-color: $hv-Ruby;
+    color: $hv-Ruby;
+    color: $hv-White;
+    font-size: 0.8em;
+    opacity: 0;
+    animation: errorShow $hv-transition forwards;
+    padding: #{$hv-input-padding-top / 3 * 2} #{$hv-input-padding-left / 3 * 2};
+    margin-top: 0.5em;
+    @at-root {
+      @keyframes errorShow {
+        from {
+          transform: translateX(-1rem);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0rem);
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &__description {
+    color: currentColor;
+    font-size: 0.85em;
+    font-family: $hv-font-family;
+    line-height: 1.5;
+    opacity: 0;
+    animation: errorShow $hv-transition forwards;
+    padding: #{$hv-input-padding-top / 2} #{$hv-input-padding-left / 2};
+  }
+  &__optional {
+    opacity: 0.5;
+    margin-left: 1ch;
+  }
+  & + & {
+    margin-top: $hv-margin;
+  }
+
+  /* STATES */
+  &--pristine {
+    .input-field__error {
+      display: none;
+    }
+  }
+  &--dirty {
+  }
+
+  &--required .input-field__input {
+    // border-right: 4px solid red;
+  }
+}
