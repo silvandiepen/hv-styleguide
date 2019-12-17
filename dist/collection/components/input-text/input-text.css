@@ -1,0 +1,96 @@
+.input-field {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  max-width: 100%;
+  font-size: 1rem;
+  font-family: "Nexa", sans-serif;
+  /* STATES */
+}
+.input-field__label {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  color: #2800a0;
+  font-size: 0.9rem;
+  font-family: "Nexa", sans-serif;
+  line-height: 1;
+  transform: translateY(0rem);
+  transform-origin: 0 100%;
+  transition: transform 0.2s ease-in-out;
+  pointer-events: none;
+  padding: 1rem 1rem 1rem 1rem;
+  padding-top: calc(1rem + 2px);
+  padding-bottom: calc(1rem + 2px);
+  padding-left: calc(1rem + 2px);
+  padding-right: calc(1rem + 2px);
+}
+.input-field__input {
+  display: block;
+  min-width: 240px;
+  border: 1px solid rgba(32, 32, 32, 0.25);
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  font-size: 0.9rem;
+  font-family: "Nexa", sans-serif;
+  line-height: 1;
+  padding: 1.3333333333rem 1rem 0.6666666667rem 1rem;
+}
+.input-field__input:not(:placeholder-shown) + .input-field__label {
+  color: #cccccc;
+}
+.input-field__input:focus + .input-field__label, .input-field__input:not(:placeholder-shown) + .input-field__label {
+  transform: translateY(-1rem) scale(0.95);
+}
+.input-field__input:focus {
+  border: 1px solid #2800a0;
+  outline: none;
+}
+.input-field__input:focus + .input-field__label {
+  color: #2800a0;
+}
+.input-field__input[disabled] {
+  border: 1px solid rgba(32, 32, 32, 0.25);
+  pointer-events: none;
+}
+.input-field__error {
+  border-radius: 0.5rem;
+  background-color: #ff3268;
+  color: #ff3268;
+  color: #ffffff;
+  font-size: 0.8em;
+  opacity: 0;
+  animation: errorShow 0.2s ease-in-out forwards;
+  padding: 0.6666666667rem 0.6666666667rem;
+  margin-top: 0.5em;
+}
+@keyframes errorShow {
+  from {
+    transform: translateX(-1rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0rem);
+    opacity: 1;
+  }
+}
+.input-field__description {
+  color: currentColor;
+  font-size: 0.85em;
+  font-family: "Nexa", sans-serif;
+  line-height: 1.5;
+  opacity: 0;
+  animation: errorShow 0.2s ease-in-out forwards;
+  padding: 0.5rem 0.5rem;
+}
+.input-field__optional {
+  opacity: 0.5;
+  margin-left: 1ch;
+}
+.input-field + .input-field {
+  margin-top: 1rem;
+}
+.input-field--pristine .input-field__error {
+  display: none;
+}

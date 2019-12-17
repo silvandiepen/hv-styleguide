@@ -1,0 +1,1 @@
+import{r as t,h as s,g as n}from"./p-29b8ddb5.js";const r=class{constructor(s){t(this,s)}render(){return s("button",{class:"hv-button"},s("span",{class:"hv-button__text"},this.label),this.icon?s("span",{class:"hv-button__icon"},this.icon):s("span",null))}get el(){return n(this)}static get style(){return":host{display:block}"}};export{r as hv_button};

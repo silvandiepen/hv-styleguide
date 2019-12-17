@@ -1,0 +1,41 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+const core = require('./core-b512de12.js');
+
+const InputField = class {
+    constructor(hostRef) {
+        core.registerInstance(this, hostRef);
+        this.optional = false;
+        this.required = !this.optional;
+        this.placeholder = " ";
+        this.bindValue = core.createEvent(this, "bindValue", 7);
+    }
+    valueChanged() {
+        const inputEl = this.el.querySelector("input");
+        // only update if model and view differ
+        if (inputEl.value !== this.value)
+            inputEl.value = this.value;
+    }
+    inputChanged(event) {
+        this.value = event.target && event.target.value;
+        this.bindValue.emit(this.value);
+    }
+    handleBlur(event) {
+        this.dirty = true;
+        this.error = false;
+        this.value = event.target && event.target.value;
+        if (this.value.length < 1 && this.required) {
+            this.error = true;
+            this.errorMessage = "You need to fill in atleast something...";
+        }
+    }
+    render() {
+        return (core.h("div", { class: "input-field" }, this.description ? (core.h("div", { class: "input-field__description" }, this.description)) : (core.h("div", null)), " ", this.errorMessage && this.error ? (core.h("div", { class: "input-field__error" }, this.errorMessage)) : (core.h("div", null)), core.h("slot", { name: "after" }), core.h("input", { onBlur: event => this.handleBlur(event), onInput: event => this.inputChanged(event), class: "input-field__input", value: this.value, id: this.elementId, name: this.name, placeholder: this.placeholder, required: this.required }), core.h("label", { class: "input-field__label" }, core.h("span", { class: "input-field__text" }, this.label, this.optional ? (core.h("span", { class: "input-field__optional" }, "(optional)")) : (``))), core.h("slot", { name: "before" })));
+    }
+    get el() { return core.getElement(this); }
+    static get style() { return ".input-field{position:relative;display:-ms-flexbox;display:flex;-ms-flex-direction:column-reverse;flex-direction:column-reverse;width:100%;max-width:100%;font-size:1rem;font-family:Nexa,sans-serif}.input-field__label{position:absolute;top:0;left:0;color:#2800a0;-webkit-transform:translateY(0);transform:translateY(0);-webkit-transform-origin:0 100%;transform-origin:0 100%;-webkit-transition:-webkit-transform .2s ease-in-out;transition:-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out;transition:transform .2s ease-in-out,-webkit-transform .2s ease-in-out;pointer-events:none;padding:1rem 1rem 1rem 1rem;padding-top:calc(1rem + 2px);padding-bottom:calc(1rem + 2px);padding-left:calc(1rem + 2px);padding-right:calc(1rem + 2px)}.input-field__input,.input-field__label{font-size:.9rem;font-family:Nexa,sans-serif;line-height:1}.input-field__input{display:block;min-width:240px;border:1px solid rgba(32,32,32,.25);border-radius:.5rem;background-color:#fff;padding:1.3333333333rem 1rem .6666666667rem 1rem}.input-field__input:not(:placeholder-shown)+.input-field__label{color:#ccc}.input-field__input:focus+.input-field__label,.input-field__input:not(:placeholder-shown)+.input-field__label{-webkit-transform:translateY(-1rem) scale(.95);transform:translateY(-1rem) scale(.95)}.input-field__input:focus{border:1px solid #2800a0;outline:none}.input-field__input:focus+.input-field__label{color:#2800a0}.input-field__input[disabled]{border:1px solid rgba(32,32,32,.25);pointer-events:none}.input-field__error{border-radius:.5rem;background-color:#ff3268;color:#ff3268;color:#fff;font-size:.8em;opacity:0;-webkit-animation:errorShow .2s ease-in-out forwards;animation:errorShow .2s ease-in-out forwards;padding:.6666666667rem .6666666667rem;margin-top:.5em}\@-webkit-keyframes errorShow{0%{-webkit-transform:translateX(-1rem);transform:translateX(-1rem);opacity:0}to{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}\@keyframes errorShow{0%{-webkit-transform:translateX(-1rem);transform:translateX(-1rem);opacity:0}to{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}.input-field__description{color:currentColor;font-size:.85em;font-family:Nexa,sans-serif;line-height:1.5;opacity:0;-webkit-animation:errorShow .2s ease-in-out forwards;animation:errorShow .2s ease-in-out forwards;padding:.5rem .5rem}.input-field__optional{opacity:.5;margin-left:1ch}.input-field+.input-field{margin-top:1rem}.input-field--pristine .input-field__error{display:none}"; }
+};
+
+exports.hv_input_text = InputField;
